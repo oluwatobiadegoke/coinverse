@@ -3,7 +3,6 @@ import { GetStaticProps, GetStaticPaths } from "next";
 import axios from "axios";
 
 import { Coin } from "../../interfaces";
-
 import Layout from "../../components/Layout";
 
 type Props = {
@@ -32,7 +31,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = data.map((coin: Coin) => ({
     params: { id: coin.id },
   }));
-  console.log(paths);
 
   return { paths, fallback: false };
 };
