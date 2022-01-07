@@ -3,7 +3,8 @@ import { GetStaticProps } from "next";
 import axios from "axios";
 import useSWR from "swr";
 
-import { Coin } from "./interfaces";
+import { Coin } from "../interfaces";
+import Layout from "../components/Layout";
 
 type Props = {
   serverCoins: Coin[];
@@ -13,12 +14,12 @@ const Home = ({ serverCoins }: Props) => {
   const [coins] = useState(serverCoins);
 
   const fetcher = async () => {
-    const res = await axios.get("www.static.coinpaper.io/api/coins.json");
+    const res = await axios.get("https://api.coinpaper.io/v1/coins/");
     return res.data as Coin[];
   };
 
   const { data, error } = useSWR(
-    "www.static.coinpaper.io/api/coins.json",
+    "https://api.coinpaper.io/v1/coins/",
     fetcher,
     { refreshInterval: 60000 }
   );
@@ -40,19 +41,24 @@ const Home = ({ serverCoins }: Props) => {
   }
 
   return (
-    <div>
-      <p>This is the homepage</p>
-    </div>
+    <Layout title="Coinverse cryptocurrency price, review and analysis">
+      <div>
+        {coins.map((coin) => {
+          return (
+            <div key={coin.id}>
+              <p>{coin.name}</p>
+            </div>
+          );
+        })}
+      </div>
+    </Layout>
   );
 };
 
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await axios.get(
-    "https://static.coinpaper.io/api/coins.json"
-  );
-  console.log(response.data);
+  const response = await axios.get("https://api.coinpaper.io/v1/coins/");
 
   return { props: { serverCoins: response.data }, revalidate: 6000 };
 };

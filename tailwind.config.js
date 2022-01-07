@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     fontFamily: {
       lato: ["Lato, sans-serif"],
+      shizuru: ["Shizuru"],
     },
     extend: {
       colors: {
