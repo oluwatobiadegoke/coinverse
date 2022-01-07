@@ -26,17 +26,17 @@ const Home = ({ serverCoins }: Props) => {
 
   if (error) {
     return (
-      <div className="error">
+      <Layout title="Error">
         <p>An error occured</p>
-      </div>
+      </Layout>
     );
   }
 
   if (!data && !coins) {
     return (
-      <div>
+      <Layout title="Loading...">
         <p>Loading...</p>
-      </div>
+      </Layout>
     );
   }
 
