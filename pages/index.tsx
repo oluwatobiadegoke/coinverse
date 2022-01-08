@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GetStaticProps } from "next";
 import axios from "axios";
 import useSWR from "swr";
 
 import { Coin } from "../interfaces";
 import Layout from "../components/Layout";
+import Gainers from "../components/HomePage/Gainers/Gainers";
+import Trending from "../components/HomePage/Trending/Trending";
 
-type Props = {
-  serverCoins: Coin[];
-};
+export interface ExtendedCoin extends Coin {
+  price_1h_percentage_change: number;
+  scores: {
+    trend: number;
+  };
+}
 
-const Home = ({ serverCoins }: Props) => {
+interface Props {
+  serverCoins: ExtendedCoin[];
+  overview: ExtendedCoin[];
+}
+
+const Home = ({ serverCoins, overview }: Props) => {
   const [coins] = useState(serverCoins);
+  const [overviewCoins] = useState(overview);
 
   const fetcher = async () => {
     const res = await axios.get("https://api.coinpaper.io/v1/coins/");
@@ -42,7 +53,16 @@ const Home = ({ serverCoins }: Props) => {
 
   return (
     <Layout title="Coinverse cryptocurrency price, review and analysis">
-      <div>
+      <main className="px-9 font-lato">
+        <div className="my-4">
+          <p className="text-xl font-bold font-lato">
+            Today&apos;s cryptocurrency prices by market cap
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-8">
+          <Gainers overviewCoins={overviewCoins} />
+          <Trending overviewCoins={overviewCoins} />
+        </div>
         {coins.map((coin) => {
           return (
             <div key={coin.id}>
@@ -50,7 +70,7 @@ const Home = ({ serverCoins }: Props) => {
             </div>
           );
         })}
-      </div>
+      </main>
     </Layout>
   );
 };
@@ -59,6 +79,15 @@ export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
   const response = await axios.get("https://api.coinpaper.io/v1/coins/");
+  //For getting overview detail which houses the trending and gainers parameters used for sorting
+  const overview = await axios.get(
+    "https://api.coinpaper.io/v1/coins/overview"
+  );
 
-  return { props: { serverCoins: response.data }, revalidate: 6000 };
+  console.log({ overview: overview.data });
+
+  return {
+    props: { serverCoins: response.data, overview: overview.data },
+    revalidate: 6000,
+  };
 };
