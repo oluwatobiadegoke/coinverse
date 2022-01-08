@@ -32,17 +32,18 @@ const HeaderForm: React.FC<AutoCompleteProps> = (coins) => {
   };
 
   return (
-    <div className="flex-1 flex justify-end font-lato">
+    <div className="w-full flex-1 flex md:justify-end font-lato">
       <AutoComplete
+        style={{ width: "100%" }}
         options={options}
         onChange={(value: string) => handleChange(value)}
         onSelect={(value: string) => handleSelect(value)}
         value=""
       >
-        <div className="flex items-center bg-gray-50 gap-2 px-4 rounded-2xl shadow">
+        <div className="w-full flex items-center bg-gray-50 gap-2 px-4 rounded-2xl shadow">
           <AiOutlineSearch />
           <input
-            className="w-96 h-8 bg-transparent text-sm font-light text-gray-600 outline-none"
+            className="w-full md:w-96 h-8 bg-transparent text-sm font-light text-gray-600 outline-none"
             placeholder="Search for a coin"
             id="search"
           />
