@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { GetStaticProps } from "next";
 import axios from "axios";
 import useSWR from "swr";
@@ -7,8 +7,15 @@ import { Coin } from "../interfaces";
 import Layout from "../components/Layout";
 import Gainers from "../components/HomePage/Gainers";
 import Trending from "../components/HomePage/Trending";
+import CoinTable from "../components/HomePage/CoinTable";
 
 export interface ExtendedCoin extends Coin {
+  rank: number;
+  price: number;
+  market_cap: number;
+  price_24h_percentage_change: number;
+  price_7d_percentage_change: number;
+  volume: number;
   price_1h_percentage_change: number;
   scores: {
     trend: number;
@@ -16,21 +23,19 @@ export interface ExtendedCoin extends Coin {
 }
 
 interface Props {
-  serverCoins: ExtendedCoin[];
   overview: ExtendedCoin[];
 }
 
-const Home = ({ serverCoins, overview }: Props) => {
-  const [coins] = useState(serverCoins);
+const Home = ({ overview }: Props) => {
   const [overviewCoins] = useState(overview);
 
   const fetcher = async () => {
-    const res = await axios.get("https://api.coinpaper.io/v1/coins/");
+    const res = await axios.get("https://api.coinpaper.io/v1/coins/overview");
     return res.data as Coin[];
   };
 
   const { data, error } = useSWR(
-    "https://api.coinpaper.io/v1/coins/",
+    "https://api.coinpaper.io/v1/coins/overview",
     fetcher,
     { refreshInterval: 60000 }
   );
@@ -43,7 +48,7 @@ const Home = ({ serverCoins, overview }: Props) => {
     );
   }
 
-  if (!data && !coins) {
+  if (!data && !overviewCoins) {
     return (
       <Layout title="Loading...">
         <p>Loading...</p>
@@ -59,17 +64,11 @@ const Home = ({ serverCoins, overview }: Props) => {
             Today&apos;s cryptocurrency prices by market cap
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 gap-8 mb-10">
           <Gainers overviewCoins={overviewCoins} />
           <Trending overviewCoins={overviewCoins} />
         </div>
-        {coins.map((coin) => {
-          return (
-            <div key={coin.id}>
-              <p>{coin.name}</p>
-            </div>
-          );
-        })}
+        <CoinTable overviewCoins={overviewCoins} />
       </main>
     </Layout>
   );
@@ -78,16 +77,13 @@ const Home = ({ serverCoins, overview }: Props) => {
 export default Home;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await axios.get("https://api.coinpaper.io/v1/coins/");
   //For getting overview detail which houses the trending and gainers parameters used for sorting
   const overview = await axios.get(
     "https://api.coinpaper.io/v1/coins/overview"
   );
 
-  console.log({ overview: overview.data });
-
   return {
-    props: { serverCoins: response.data, overview: overview.data },
+    props: { overview: overview.data },
     revalidate: 6000,
   };
 };
