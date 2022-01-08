@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AiOutlineArrowUp } from "react-icons/ai";
 
-import { ExtendedCoin } from "../../../pages";
+import { ExtendedCoin } from "../../pages";
 
 interface Props {
   overviewCoins: ExtendedCoin[];

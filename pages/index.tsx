@@ -5,8 +5,8 @@ import useSWR from "swr";
 
 import { Coin } from "../interfaces";
 import Layout from "../components/Layout";
-import Gainers from "../components/HomePage/Gainers/Gainers";
-import Trending from "../components/HomePage/Trending/Trending";
+import Gainers from "../components/HomePage/Gainers";
+import Trending from "../components/HomePage/Trending";
 
 export interface ExtendedCoin extends Coin {
   price_1h_percentage_change: number;
