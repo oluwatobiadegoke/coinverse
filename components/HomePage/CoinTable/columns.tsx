@@ -5,7 +5,7 @@ export const columns = [
     title: "#",
     dataIndex: "rank",
     key: "rank",
-    fixed: "left",
+    fixed: "left" as "left",
     width: "70px",
     sorter: (a: any, b: any) => a.rank - b.rank,
     sortDirections: ["descend"],
@@ -14,7 +14,7 @@ export const columns = [
     title: "Name",
     dataIndex: "name",
     key: "name",
-    fixed: "left",
+    fixed: "left" as "left",
     width: "125px",
   },
   {

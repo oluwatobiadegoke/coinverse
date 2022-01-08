@@ -36,7 +36,7 @@ const Gainers = ({ overviewCoins }: Props) => {
             <div key={id} className="flex">
               <div className="flex-1 flex items-center gap-3">
                 <span>{index + 1}</span>
-                <span className="font-semibold">{symbol}</span>
+                <span className="font-semibold w-12">{symbol}</span>
                 <span>{name}</span>
               </div>
               <div className="flex items-center gap-2 text-green-700 font-semibold">
