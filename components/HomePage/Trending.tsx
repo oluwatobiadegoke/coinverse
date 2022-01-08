@@ -31,11 +31,11 @@ const Trending = ({ overviewCoins }: Props) => {
           const { id, name, symbol, price_1h_percentage_change } = coin;
           return (
             <div key={id} className="flex">
-              <div className="flex items-center gap-3">
+              <div className="flex-1 flex items-center gap-3">
                 <span>{index + 1}</span>
                 <span className="font-semibold">{symbol}</span>
+                <span>{name}</span>
               </div>
-              <span className="flex-1">{name}</span>
               <div
                 className={`flex items-center gap-2 text-green-700 font-semibold ${
                   price_1h_percentage_change > 0

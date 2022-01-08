@@ -59,6 +59,14 @@ const Home = ({ overview }: Props) => {
   return (
     <Layout title="Coinverse cryptocurrency price, review and analysis">
       <main className="px-2 md:px-4 lg:px-9 font-lato">
+        <div className="flex items-center justify-center flex-1 gap-1 font-bold mt-14 md:mt-20 mb-3 md:mb-5">
+          <span className="text-pri-500 text-5xl font-shizuru">C</span>
+          <span className="mt-1 text-xl md:text-2xl font-light">oinverse</span>
+        </div>
+        <div className="mb-20 px-6 text-center text-xl md:text-2xl font-light">
+          <p className="mb-0">Bringing you</p>
+          <p className="mb-0">undiluted info and analysis of our top coins</p>
+        </div>
         <div className="my-4">
           <p className="text-base lg:text-xl font-bold font-lato">
             Today&apos;s cryptocurrency prices by market cap

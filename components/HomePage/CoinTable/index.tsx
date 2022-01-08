@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { Table } from "antd";
 
 import { ExtendedCoin } from "../../../pages";
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const CoinTable = ({ overviewCoins }: Props) => {
+  const router = useRouter();
   const [coins] = useState(overviewCoins);
   const [reformedData, setReformedData] = useState<ReformedData[]>([]);
 
@@ -53,7 +55,18 @@ const CoinTable = ({ overviewCoins }: Props) => {
 
   return (
     <div>
-      <Table columns={columns} dataSource={reformedData} scroll={{ x: 1300 }} />
+      <Table
+        columns={columns}
+        dataSource={reformedData}
+        scroll={{ x: 1300 }}
+        onRow={(record) => {
+          return {
+            onClick: () => {
+              router.push(`/coin/${record.id}`);
+            }, // click row
+          };
+        }}
+      />
     </div>
   );
 };
