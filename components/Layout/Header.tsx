@@ -38,7 +38,7 @@ const Header = () => {
         <Link href="/">
           <a className="flex md:hidden items-center flex-1 gap-1 font-bold">
             <span className="text-pri-500 text-3xl font-shizuru">C</span>
-            <span className="mt-1 text-lg font-light">oinverse</span>
+            <span className="mt-1 text-lg font-light text-black">oinverse</span>
           </a>
         </Link>
       ) : (
@@ -62,7 +62,7 @@ const Header = () => {
       <Link href="/">
         <a className="hidden md:flex items-center flex-1 gap-1 font-bold">
           <span className="text-pri-500 text-3xl font-shizuru">C</span>
-          <span className="mt-1 text-lg font-light">oinverse</span>
+          <span className="mt-1 text-lg font-light text-black">oinverse</span>
         </a>
       </Link>
 
