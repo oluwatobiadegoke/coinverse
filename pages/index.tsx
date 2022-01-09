@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GetStaticProps } from "next";
 import axios from "axios";
 import useSWR from "swr";
+import { Result } from "antd";
 
 import { Coin } from "../interfaces";
 import Layout from "../components/Layout";
@@ -43,15 +44,11 @@ const Home = ({ overview }: Props) => {
   if (error) {
     return (
       <Layout title="Error">
-        <p>An error occured</p>
-      </Layout>
-    );
-  }
-
-  if (!data && !overviewCoins) {
-    return (
-      <Layout title="Loading...">
-        <p>Loading...</p>
+        <Result
+          status="500"
+          title="500"
+          subTitle="Sorry, something went wrong. Keep calm and refresh the page."
+        />
       </Layout>
     );
   }

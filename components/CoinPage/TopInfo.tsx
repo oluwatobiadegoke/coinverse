@@ -25,8 +25,10 @@ const TopInfo = ({
   return (
     <div className=" my-20">
       <div className="flex items-center justify-center text-gray-500">
-        <span className="font-shizuru font-bold  text-6xl">{symbol}-</span>{" "}
-        <span className="font-light text-5xl mt-2">{name}</span>
+        <span className="font-shizuru font-bold text-3xl lg:text-6xl">
+          {symbol}-
+        </span>{" "}
+        <span className="font-light text-2xl lg:text-5xl mt-2">{name}</span>
       </div>
       <div className="max-w-lg mx-auto w-full flex items-center justify-center flex-wrap gap-2 mt-5">
         <div className="flex items-center gap-1 bg-gray-100 text-black px-4 rounded-xl">
