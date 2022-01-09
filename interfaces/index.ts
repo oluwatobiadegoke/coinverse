@@ -17,3 +17,29 @@ export type ReformedData = {
   market_cap: number | string;
   volume: number | string;
 };
+
+export interface InfoProps extends Coin {
+  founded: string;
+  descriptions: {
+    introduction: string;
+    technology: string;
+  };
+  whitepaper: {
+    abstract: string;
+  };
+  website: {
+    url: string;
+  };
+  video: {
+    url: string;
+  };
+  socials: {
+    twitter: string;
+    facebook: string;
+    telegram: string;
+    reddit: string;
+    vimeo: string;
+    discord: string;
+    medium: string;
+  };
+}
