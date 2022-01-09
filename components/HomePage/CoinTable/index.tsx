@@ -63,7 +63,7 @@ const CoinTable = ({ overviewCoins }: Props) => {
           return {
             onClick: () => {
               router.push(`/coin/${record.id}`);
-            }, // click row
+            },
           };
         }}
       />

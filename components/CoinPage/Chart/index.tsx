@@ -15,15 +15,6 @@ interface historyProps {
   volume: number;
 }
 
-type coinHistory = {
-  history_1y: historyProps[];
-  history_3m: historyProps[];
-  history_5y: historyProps[];
-  history_7d: historyProps[];
-  history_24h: historyProps[];
-  history_30d: historyProps[];
-};
-
 const Chart = () => {
   const router = useRouter();
 
@@ -63,38 +54,36 @@ const Chart = () => {
     setRangeName(timerange.filter((time) => time.id === history)[0].name);
   }, [history]);
 
-  console.log(data);
-
   const config = {
     data: chartConfig,
     height: 400,
     xField: "timestamp",
     yField: "price",
-    annotations: [
-      {
-        type: "regionFilter",
-        start: ["min", "median"],
-        end: ["max", "0"],
-        color: "#F4664A",
-      },
-      {
-        type: "text",
-        position: ["min", "median"],
-        offsetY: -4,
-        style: {
-          textBaseline: "bottom",
-        },
-      },
-      {
-        type: "line",
-        start: ["min", "median"],
-        end: ["max", "median"],
-        style: {
-          stroke: "#F4664A",
-          lineDash: [2, 2],
-        },
-      },
-    ],
+    // annotations: [
+    //   {
+    //     type: "regionFilter",
+    //     start: ["min", "median"],
+    //     end: ["max", "0"],
+    //     color: "#F4664A",
+    //   },
+    //   {
+    //     type: "text",
+    //     position: ["min", "median"],
+    //     offsetY: -4,
+    //     style: {
+    //       textBaseline: "bottom",
+    //     },
+    //   },
+    //   {
+    //     type: "line",
+    //     start: ["min", "median"],
+    //     end: ["max", "median"],
+    //     style: {
+    //       stroke: "#F4664A",
+    //       lineDash: [2, 2],
+    //     },
+    //   },
+    // ],
   };
 
   const handleMenuClick = (e: any) => {

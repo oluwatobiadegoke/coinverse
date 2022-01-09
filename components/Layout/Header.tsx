@@ -20,7 +20,7 @@ const Header = () => {
     return res.data as Coin[];
   };
 
-  const { data, error } = useSWR("https://api.coinpaper.io/v1/coins/", fetcher);
+  const { data } = useSWR("https://api.coinpaper.io/v1/coins/", fetcher);
 
   useEffect(() => {
     let coins: ExtendedCoin[] = [];

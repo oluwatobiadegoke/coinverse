@@ -8,7 +8,6 @@ export const columns = [
     fixed: "left" as "left",
     width: "70px",
     sorter: (a: any, b: any) => a.rank - b.rank,
-    sortDirections: ["descend"],
   },
   {
     title: "Name",
@@ -22,7 +21,6 @@ export const columns = [
     dataIndex: "price",
     key: "price",
     sorter: (a: any, b: any) => a.price - b.price,
-    sortDirections: ["descend", "ascend"],
   },
   {
     title: "1h Change",
@@ -39,7 +37,6 @@ export const columns = [
       </div>
     ),
     sorter: (a: any, b: any) => a.oneh_change - b.oneh_change,
-    sortDirections: ["descend", "ascend"],
   },
   {
     title: "24h Change",
@@ -56,7 +53,6 @@ export const columns = [
       </div>
     ),
     sorter: (a: any, b: any) => a.twentyfourh_change - b.twentyfourh_change,
-    sortDirections: ["descend", "ascend"],
   },
   {
     title: "7d Change",
@@ -73,7 +69,6 @@ export const columns = [
       </div>
     ),
     sorter: (a: any, b: any) => a.seven_days_change - b.seven_days_change,
-    sortDirections: ["descend", "ascend"],
   },
   {
     title: "Marketcap",
